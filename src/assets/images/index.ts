@@ -1,0 +1,9 @@
+export const Marked = require('./home/marker.png');
+export const PromoOne = require('./home/promo-one.png');
+export const PromoTwo = require('./home/promo-two.png');
+export const LogoGif = require('./home/logo.gif');
+export const Walk1 = require('./home/walk1.png');
+export const Walk2 = require('./home/walk2.png');
+export const Walk3 = require('./home/walk3.png');
+export const Fyp1 = require('./home/fyp1.png');
+export const XBg = require('./home/x-bg.png');

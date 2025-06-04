@@ -107,6 +107,15 @@ android {
     }
 }
 
+repositories {
+    mavenCentral()
+    google()
+    maven {
+    url "https://repo.qoreid.com/repository/maven-releases/"
+    }
+    maven { url 'https://jitpack.io' }
+}
+
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
