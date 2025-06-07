@@ -188,7 +188,7 @@ export const Converter = ({
           label={topLabel}
           inputRef={inputRef}
           disabled={disabled}
-          balance="100000"
+          balance={balance}
         />
 
         <SvgIcon
@@ -212,6 +212,7 @@ export const Converter = ({
           label={bottomLabel}
           inputRef={inputRef2}
           disabled={disabled}
+          errorNote={error}
         />
       </Block>
 

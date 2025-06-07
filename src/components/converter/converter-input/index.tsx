@@ -1,3 +1,4 @@
+import {SizedBox} from '@components/sized-box';
 import {Text} from '@components/text';
 import {HDP} from '@helpers';
 import {family, palette} from '@theme';
@@ -145,6 +146,7 @@ export const ConverterInput: FC<Props> = ({
             height={40}
             alignItems="center"
             row>
+            <SizedBox width={5} />
             <SvgIcon
               name={activeCurrency?.abbreviation?.toLowerCase()}
               size={20}
@@ -152,19 +154,15 @@ export const ConverterInput: FC<Props> = ({
             <Text color="#14290A" medium>
               {activeCurrency?.abbreviation}
             </Text>
-            <SvgIcon name={'caret-down'} size={20} />
+            <SizedBox width={10} />
+            {/* <SvgIcon name={'caret-down'} size={20} /> */}
           </Block>
         </Block>
       </Block>
       {errorNote?.length ? (
-        <Block
-          gap={5}
-          alignItems="center"
-          row
-          justify="flex-end"
-          style={{paddingTop: 10}}>
+        <Block gap={5} alignItems="center" row style={{paddingTop: 5}}>
           <SvgIcon name="warning" size={16} />
-          <Text>{errorNote}</Text>
+          <Text size={12}>{errorNote}</Text>
         </Block>
       ) : null}
     </>

@@ -3,49 +3,69 @@ import {Text} from '@components/text';
 import {HDP} from '@helpers';
 import {hideToast} from '@slices/toast';
 import {palette} from '@theme';
-import React, {useEffect} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {Animated, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from 'store';
 
+// Toast.tsx
 const Toast = () => {
   const dispatch = useDispatch();
   const {isVisible, message, title, type} = useSelector(
     (state: RootState) => state.toast,
   );
-  const slideAnim = new Animated.Value(-100);
+  const slideAnim = useRef(new Animated.Value(-100)).current;
   const insets = useSafeAreaInsets();
+  const timerRef = useRef<NodeJS.Timeout>(null);
 
   const handleClose = () => {
-    // First animate out
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+
     Animated.timing(slideAnim, {
       toValue: -100,
       duration: 300,
       useNativeDriver: true,
     }).start(() => {
-      // Then dispatch hideToast after animation completes
       dispatch(hideToast());
     });
   };
 
+  const show = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+
+    slideAnim.setValue(-100);
+
+    Animated.timing(slideAnim, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+
+    timerRef.current = setTimeout(() => {
+      handleClose();
+    }, 7000);
+  };
+
   useEffect(() => {
     if (isVisible) {
-      // Slide in from top
-      Animated.timing(slideAnim, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: true,
-      }).start();
-
-      // Auto-hide after 7 seconds
-      const timer = setTimeout(() => {
-        handleClose();
-      }, 7000);
-
-      return () => clearTimeout(timer);
+      show();
+    } else {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
     }
-  }, [isVisible, dispatch]);
+
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
+  }, [isVisible, message, title, type]);
 
   if (!isVisible) return null;
 

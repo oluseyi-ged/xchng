@@ -76,7 +76,6 @@ const AppStackScreens = ({navigation}) => {
               });
           }
         } catch (error) {
-          console.error('Token check failed:', error.message);
           handleLogout();
         }
       } else {

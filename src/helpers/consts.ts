@@ -119,10 +119,6 @@ export const dateFilters = [
 
 export const allCurrencies = [
   {
-    currency: 'Euros',
-    abbreviation: 'EUR',
-  },
-  {
     currency: 'United States Dollar',
     abbreviation: 'USD',
   },

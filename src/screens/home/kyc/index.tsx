@@ -125,9 +125,9 @@ export const Kyc: FC = ({navigation}: any) => {
       id: 3,
       icon: 'liveness',
       title: 'Liveness Check',
-      active: true,
-      // kycData?.data?.addedAddressDetails &&
-      // !kycData?.data?.livelinessCompleted,
+      active:
+        kycData?.data?.addedAddressDetails &&
+        !kycData?.data?.livelinessCompleted,
       done: kycData?.data?.livelinessCompleted,
     },
   ];
